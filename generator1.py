@@ -1,8 +1,12 @@
 def iter_grid_ids(fpath):
     with open(fpath) as fil:
-        for line in fil.readlines():
-            if line.strip().__contains__('GRID' or 'GRIDS*'):
-                lis = line.strip().split()
+        line = True
+        while line:
+            line = fil.readline()
+            lis = line.strip().split()
+            if len(lis) != 0 and lis[0] == 'GRID*':
+                yield lis[1]
+            elif len(lis) != 0 and lis[0] == 'GRID':
                 yield lis[1]
 
 
